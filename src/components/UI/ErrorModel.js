@@ -5,9 +5,10 @@ import Button from './Button';
 
 
 const ErrorModel = (props) => {
+
     //Props children gives whatever is passed
     return (
-    <div>
+    <div onClick={props.errorHandle}>
     <div className={classes.backdrop}> 
     </div>
     <Card className={classes.modal}>
@@ -17,7 +18,7 @@ const ErrorModel = (props) => {
         <div className={classes.content}><p>
             {props.message}</p></div>
         <footer className={classes.actions}>
-            <Button>Okay</Button>
+            <Button onClick={props.errorHandle}>Okay</Button>
         </footer>
     </Card>
     </div>);
