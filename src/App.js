@@ -20,10 +20,11 @@ function App() {
   };
 
   return (
-    <div>
+    <>
     <AddUser usenameUsersHandler={usenameUsersHandler}/>
     <UserList users={enteredUsers}/>
-    </div>
+    </>
+    //Or React.Fragments can be used as the syntax
   );
 }
 
