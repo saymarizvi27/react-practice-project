@@ -2,16 +2,17 @@ import React from 'react';
 import classes from './Error.module.css';
 import Card from './Card';
 import Button from './Button';
+import ReactDom from 'react-dom';
 
-
-const ErrorModel = (props) => {
-
-    //Props children gives whatever is passed
+const Backdrop = (props) =>{
     return (
-    <div onClick={props.errorHandle}>
-    <div className={classes.backdrop}> 
-    </div>
-    <Card className={classes.modal}>
+        <div className={classes.backdrop} onClick={props.errorHandle}></div>
+    )
+};
+
+const ModelOverlay = (props) =>{
+     return (
+        <Card className={classes.modal} onClick={props.errorHandle}>
         <header classes={classes.header}>
             <h2>{props.title}</h2>
         </header>
@@ -21,7 +22,19 @@ const ErrorModel = (props) => {
             <Button onClick={props.errorHandle}>Okay</Button>
         </footer>
     </Card>
-    </div>);
+     )
+};
+const ErrorModel = (props) => {
+
+    //Props children gives whatever is passed
+    return (
+         <React.Fragment>
+          {ReactDom.createPortal(<Backdrop errorHandle={props.errorHandle}/>,document.getElementById('backdrop-root'))}
+          {ReactDom.createPortal(<ModelOverlay errorHandle={props.errorHandle}
+          title={props.title} message={props.message}/>,document.getElementById('overlay-root'))}
+         </React.Fragment>   
+    );
+       
 };
 
 
